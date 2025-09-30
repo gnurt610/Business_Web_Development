@@ -1,0 +1,16 @@
+thead{
+            background-color:mediumblue;
+            font-weight: bolder;
+            color:white
+        }
+tbody tr:nth-child(2n){
+            background-color: aqua;
+        }
+tbody tr:nth-child(2n+1){
+            background-color: aquamarine;
+        }
+table {
+        border-collapse: collapse; 
+        width: 80%; 
+        margin: auto;
+    }
