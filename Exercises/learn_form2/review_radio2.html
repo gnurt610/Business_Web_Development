@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Trung Trung Nhân Nhân</title>
+    <script>
+        function show_image(value)
+        {
+            img=document.getElementById("Taylor_avatar")
+            img.setAttribute("style","display:"+value)
+        }
+        function hide_image(value)
+        {
+            img=document.getElementById("Taylor_avatar")
+            img.setAttribute("style","display:"+value)
+        }
+    </script>
+</head>
+<body>
+    <form name="myform">
+        <input type="radio" name="myimage" id="img1" onchange="show_image('block')"/>
+        <label for="img1">Show Image</label>
+        <br/>
+        <input type="radio" name="myimage" id="img2" onchange='hide_image("none")'/>
+        <label for="img2">Hide Image</label>
+        <br/>
+        <img src="../Exercises/Ex14/images/Taylor.jpg" id="Taylor_avatar" name="Taylor_avatar"/>
+    </form>
+</body>
+</html>
