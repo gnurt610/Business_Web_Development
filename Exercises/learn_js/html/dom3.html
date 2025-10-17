@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dom 3 - Trung Nhân</title>
+    <script type="text/javascript">
+        var dataset=[
+            {
+                ID:"P01",
+                Name:"coca",
+                Quantity:15,
+                Price:15,
+                Photo:"coca.png"
+            },
+            {
+                ID:"P02",
+                Name:"Pepsi",
+                Quantity:15,
+                Price:15,
+                Photo:"pepsi.png"
+            },
+            {
+                ID:"P03",
+                Name:"Sting",
+                Quantity:15,
+                Price:15,
+                Photo:"sting.png"
+            },
+            {
+                ID:"P04",
+                Name:"Fanta",
+                Quantity:15,
+                Price:15,
+                Photo:"fanta.png"
+            },
+            {
+                ID:"P05",
+                Name:"Lavie",
+                Quantity:15,
+                Price:15,
+                Photo:"lavie.png"
+            },
+        ]
+    </script>
+</head>
+<body>
+    <table border="1">
+        <caption>List of Product</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Photos</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="product_tbody">
+            
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        function display_product_table()
+        {
+            //get product_tbody elements
+            product_tbody=document.getElementById("product_tbody")
+            //loop all items
+            for (i=0;i<dataset.length;i++)
+        {
+            //get a product by index
+            product=dataset[i]
+            //create new tr(row)
+            row=document.createElement("tr")
+            //create 6 td(s) for this row
+            td_id=document.createElement("td")
+            td_name=document.createElement("td")
+            td_quantity=document.createElement("td")
+            td_price=document.createElement("td")
+            td_photo=document.createElement("td")
+            td_action=document.createElement("td")
+            //assignvalue for td
+            td_id.innerText=product.ID
+            td_name.innerText=product.Name
+            td_quantity.innerText=product.Quantity
+            td_price.innerText=product.Price
+
+
+            //td_photo.innerText=""
+            img_p = document.createElement("img");
+            img_p.setAttribute("src", "../images/" + product.Photo);
+            img_p.setAttribute("width", "100");
+            img_p.setAttribute("height", "120");
+            img_p.setAttribute("title", "Nhấp nhấp nhấp");
+            img_p.setAttribute("style", "cursor:pointer");
+            td_photo.appendChild(img_p)
+
+
+            //td_action.innerText="<to be continued>"
+            img_detail=document.createElement("img");
+            img_detail.setAttribute("src", "../images/detail.png");
+            img_detail.setAttribute("width", "50");
+            img_detail.setAttribute("height", "50");
+            img_detail.setAttribute("style", "cursor:pointer");
+            td_action.appendChild(img_detail)
+
+            img_detail.selected_product=product
+            img_detail.onclick=function()
+            {
+                //get selected product
+                p=this.selected_product
+                stringJsonObject=JSON.stringify(p)
+                localStorage.setItem("selected_product",stringJsonObject)
+                window.open("detail.html","_self")
+            }
+
+            img_edit=document.createElement("img");
+            img_edit.setAttribute("src", "../images/edit.png");
+            img_edit.setAttribute("width", "50");
+            img_edit.setAttribute("height", "50");
+            img_edit.setAttribute("style", "cursor:pointer");
+            td_action.appendChild(img_edit)
+
+            img_delete=document.createElement("img");
+            img_delete.setAttribute("src", "../images/bin.png");
+            img_delete.setAttribute("width", "50");
+            img_delete.setAttribute("height", "50");
+            img_delete.setAttribute("style", "cursor:pointer");
+            td_action.appendChild(img_delete)
+
+            img_delete.parent_row=row
+            img_delete.onclick=function()
+            {
+                selected_row=this.parent_row
+                name_remove=selected_row.childNodes[1].innerText
+                if(confirm("Bạn muốn xóa ("+name_remove+") hả?"))
+                {
+                    product_tbody.removeChild(selected_row)
+                }
+            }
+
+            //
+            row.appendChild(td_id)
+            row.appendChild(td_name)
+            row.appendChild(td_quantity)
+            row.appendChild(td_price)
+            row.appendChild(td_photo)
+            row.appendChild(td_action)
+            //
+            product_tbody.appendChild(row)
+        }
+        }
+        //call functions
+        display_product_table()
+    </script>
+</body>
+</html>
